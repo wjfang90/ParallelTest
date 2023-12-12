@@ -85,8 +85,8 @@ void ParallelForBreak() {
     如果循环之外还有需要执行的代码则用Break,否则使用Stop
      */
     ParallelLoopResult result = Parallel.For(0, 20, (int index, ParallelLoopState pls) => {
-
-        Console.WriteLine($"index={index},task={Task.CurrentId},thread={Thread.CurrentThread.ManagedThreadId}");
+        
+        Console.WriteLine($"index={index},task={Task.CurrentId},thread={Environment.CurrentManagedThreadId}");
 
         Thread.Sleep(100);
 
@@ -150,7 +150,7 @@ void ParalleForEachIndex() {
 
 void ParalleForEachLocal() {
     Console.WriteLine("==============Parallel.ForEach  local===============");
-    ConcurrentDictionary<string, int> dict = new ConcurrentDictionary<string, int>();
+    var dict = new ConcurrentDictionary<string, int>();
     var colors = new string[] { "red", "green", "blue", "yellow" };
 
     ParallelLoopResult result = Parallel.ForEach<string, KeyValuePair<string, int>>(
